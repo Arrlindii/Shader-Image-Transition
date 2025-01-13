@@ -1,0 +1,40 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: #000000;
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+
+.section
+{
+    height: 100vh;
+    position: relative;
+}
+
+.heading {
+    color: #ffffff;
+    text-transform: uppercase;
+    mix-blend-mode: difference;
+    position: fixed;
+    bottom: 1rem;
+    right: 2rem;
+    font-size: 12vmin;
+}
+
+/* hide scrollbar */
+html { scrollbar-width: none; } /* Firefox */
+body { -ms-overflow-style: none; } /* IE and Edge */
+body::-webkit-scrollbar, body::-webkit-scrollbar-button { display: none; } /* Chrome */
+/* end hide scrollbar */
