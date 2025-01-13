@@ -87,7 +87,7 @@ const onSectionEnter = (section) => {
     gsap.to(
         sectionMeshes[section].material.uniforms.uProgress,
         {
-            duration: 2.0, 
+            duration: 3.0, 
             value: 1.0,
         }
     )
