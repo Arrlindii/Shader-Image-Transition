@@ -41,10 +41,10 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 const material = new THREE.MeshBasicMaterial(0xff0000)
 const objectsDistance = sizes.height;
 
-const mesh1 = MeshItem(1000, 667);
-const mesh2 = MeshItem(450, 581);
-const mesh3 = MeshItem(553, 600);
-const mesh4 = MeshItem(600, 600);
+const mesh1 = MeshItem(1000, 667)
+const mesh2 = MeshItem(450, 581)
+const mesh3 = MeshItem(553, 600)
+const mesh4 = MeshItem(600, 600)
 
 const sectionMeshes = [mesh1, mesh2, mesh3, mesh4]
 
@@ -61,6 +61,11 @@ loader.loadTextures((textures) => {
     for (let i = 0; i < sectionMeshes.length; i++) {
         sectionMeshes[i].material.uniforms.uTexture.value = textures[i]
     }
+
+    observeScroll()
+    const section = Math.round(scrollY / sizes.height)
+    onSectionEnter(section)
+    tick()
 })
 
 
@@ -70,24 +75,30 @@ loader.loadTextures((textures) => {
 let scrollY = window.scrollY
 let currentSection = -1
 
-window.addEventListener('scroll', () => {
-    scrollY = window.scrollY
 
-    let newSection = scrollY / sizes.height
-    newSection = Math.round(newSection)
+// shift 
+let shift = 0
 
-    if (currentSection != newSection) {
-        onSectionEnter(newSection)
-    }
-})
+const observeScroll = () => {
+    window.addEventListener('scroll', () => {
+        scrollY = window.scrollY
+    
+        let newSection = scrollY / sizes.height
+        newSection = Math.round(newSection)
+        
+        if (currentSection != newSection) {
+            shift += newSection - currentSection
+            currentSection = newSection
+            onSectionEnter(newSection)
+        }
+    })
+}
 
 const onSectionEnter = (section) => {
-    currentSection = section
-
     gsap.to(
         sectionMeshes[section].material.uniforms.uProgress,
         {
-            duration: 3.0, 
+            duration: 3.0,
             value: 1.0,
         }
     )
@@ -115,7 +126,3 @@ const tick = () =>
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick)
 }
-
-tick()
-const section = scrollY / sizes.height
-onSectionEnter(section)
