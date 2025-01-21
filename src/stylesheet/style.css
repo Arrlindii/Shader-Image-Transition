@@ -24,13 +24,13 @@ html {
 }
 
 .heading {
-    color: #ffffff;
     text-transform: uppercase;
     mix-blend-mode: difference;
     position: fixed;
     bottom: 1rem;
     right: 2rem;
     font-size: 12vmin;
+    font-weight: 500;
 }
 
 /* hide scrollbar */

@@ -9,7 +9,7 @@
   font-size: 14px;
   --color-text: #fff;
   --color-bg: #000;
-  --color-link: #fff;
+  --color-link: #afafaf;
   --color-link-hover: #fff;
   --page-padding: 1.5rem;
 }
@@ -18,7 +18,11 @@ body {
   margin: 0;
   color: var(--color-text);
   background-color: var(--color-bg);
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Instrument Sans", Helvetica, serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -98,6 +102,7 @@ a {
 }
 
 .frame {
+  
   padding: 3rem var(--page-padding) 0;
   display: grid;
   z-index: 1000;
@@ -112,7 +117,6 @@ a {
     'back'
     'archive'
     'github'
-    'demos'
     'tags'
     'sponsor';
 
@@ -171,11 +175,11 @@ a {
     grid-template-rows: auto auto;
     align-content: space-between;
     grid-template-areas:
-      'title back github archive demos'
-      'tags tags tags sponsor sponsor';
+      'title back github archive tags'
+      'sponsor sponsor sponsor ... ...';
 
     .frame__tags {
-      align-self: end;
+      justify-self: end;
     }
 
     .frame__demos,
