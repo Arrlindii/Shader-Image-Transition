@@ -2,7 +2,7 @@
 
 Demo for the tutorial on creating dynamic image transitions with WebGL shaders, exploring techniques like circle SDFs, noise patterns, smooth merging, and texture integration.
 
-![Image Title](https://generative-placeholders.glitch.me/image?width=800&height=600")
+![Shader Image Transition](https://tympanus.net/codrops/wp-content/uploads/2025/01/imagereveal_feat.png)
 
 [Article on Codrops](https://tympanus.net/codrops/?p=85782)
 
