@@ -184,8 +184,7 @@ a {
 
     .frame__demos,
     #cdawrap {
-      justify-self: end;
-      text-align: right;
+      align-self: end;
       max-width: 300px;
     }
   }
