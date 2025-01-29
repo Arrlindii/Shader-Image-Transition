@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import gsap from 'gsap'
+
 import MeshItem from './MeshItem'
 import Loader from './js/Loader'
 
@@ -36,21 +37,22 @@ const observeResize = () => {
 observeResize()
 
 const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 2000)
+
 camera.position.set(0, 0, 1600)
 scene.add(camera)
 
 const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
+    canvas,
     alpha: true,
 })
+
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 /**
  * Objects
  */
-const material = new THREE.MeshBasicMaterial(0xff0000)
-const objectsDistance = sizes.height;
+const objectsDistance = sizes.height
 
 const mesh1 = MeshItem(1000, 667)
 const mesh2 = MeshItem(450, 581)
@@ -66,15 +68,18 @@ sectionMeshes.forEach((mesh, i) =>
 scene.add(mesh1, mesh2, mesh3, mesh4)
 
 const loader = new Loader()
+
 loader.loadTextures((textures) => {
-    document.body.classList.remove("loading");
+    document.body.classList.remove('loading')
 
     sectionMeshes.forEach((mesh, i) =>
       mesh.material.uniforms.uTexture.value = textures[i]
     )
 
     observeScroll()
+
     const section = Math.round(scrollY / sizes.height)
+
     onSectionEnter(section)
     tick()
 })
@@ -85,7 +90,6 @@ loader.loadTextures((textures) => {
  */
 let scrollY = window.scrollY
 let currentSection = -1
-
 
 // shift 
 let shift = 0
@@ -124,22 +128,16 @@ const onSectionEnter = (section) => {
 /**
  * Tick
  */
-const clock = new THREE.Clock()
-let time = 0
 let targetPosY = -scrollY
 
 const lerp = (a, b, t) => {
-    return a + (b - a) * t;
+    return a + (b - a) * t
 }
 
-const tick = () =>
-{
-    const elapsedTime = clock.getElapsedTime()
-    const deltaTime = elapsedTime - time
-    time = elapsedTime
-
+const tick = () => {
     targetPosY = lerp(targetPosY, -scrollY, 0.1)
     camera.position.y = targetPosY
+
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick)
 }
