@@ -86,7 +86,7 @@ const observeScroll = () => {
         let newSection = scrollY / sizes.height
         newSection = Math.round(newSection)
         
-        if (currentSection != newSection) {
+        if (currentSection !== newSection) {
             shift += newSection - currentSection
             currentSection = newSection
             onSectionEnter(newSection)

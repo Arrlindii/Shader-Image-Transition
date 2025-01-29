@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+
 import vertexShader from './shaders/vertex.glsl' 
 import fragmentShader from './shaders/fragment.glsl' 
 
@@ -16,5 +17,6 @@ export default function(w, h) {
     })
 
     const mesh = new THREE.Mesh(geometry, material)
+
     return mesh
 }

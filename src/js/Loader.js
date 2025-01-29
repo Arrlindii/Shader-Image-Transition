@@ -16,7 +16,7 @@ export default class Loader {
                 textures[index] = texture
     
                 loadCount += 1
-                if (loadCount == imageSources.length) {
+                if (loadCount === imageSources.length) {
                     onComplete(textures)
                 }
             }
