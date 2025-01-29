@@ -14,15 +14,26 @@ const sizes = {
     height: window.innerHeight
 }
 
-window.addEventListener('resize', () =>
-{
-    sizes.width = window.innerWidth
-    sizes.height = window.innerHeight
-    camera.aspect = sizes.width / sizes.height
-    camera.updateProjectionMatrix()
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
+const observeResize = () => {
+    const resizeHandler = () => {
+        sizes.width = window.innerWidth
+        sizes.height = window.innerHeight
+
+        camera.aspect = sizes.width / sizes.height
+        camera.updateProjectionMatrix()
+
+        renderer.setSize(sizes.width, sizes.height)
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    }
+
+    window.addEventListener('resize', resizeHandler)
+
+    return () => {
+        window.removeEventListener('resize', resizeHandler)
+    }
+}
+
+observeResize()
 
 const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 2000)
 camera.position.set(0, 0, 1600)
@@ -80,18 +91,24 @@ let currentSection = -1
 let shift = 0
 
 const observeScroll = () => {
-    window.addEventListener('scroll', () => {
+    const scrollHandler = () => {
         scrollY = window.scrollY
-    
-        let newSection = scrollY / sizes.height
-        newSection = Math.round(newSection)
-        
+
+        const newSection = Math.round(scrollY / sizes.height)
+
         if (currentSection !== newSection) {
             shift += newSection - currentSection
             currentSection = newSection
+
             onSectionEnter(newSection)
         }
-    })
+    }
+
+    window.addEventListener('scroll', scrollHandler)
+
+    return () => {
+        window.removeEventListener('scroll', scrollHandler)
+    }
 }
 
 const onSectionEnter = (section) => {
