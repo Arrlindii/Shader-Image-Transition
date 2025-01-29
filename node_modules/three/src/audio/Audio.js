@@ -158,7 +158,7 @@ class Audio extends Object3D {
 
 	}
 
-	stop() {
+	stop( delay = 0 ) {
 
 		if ( this.hasPlaybackControl === false ) {
 
@@ -171,7 +171,7 @@ class Audio extends Object3D {
 
 		if ( this.source !== null ) {
 
-			this.source.stop();
+			this.source.stop( this.context.currentTime + delay );
 			this.source.onended = null;
 
 		}
@@ -328,6 +328,7 @@ class Audio extends Object3D {
 	onEnded() {
 
 		this.isPlaying = false;
+		this._progress = 0;
 
 	}
 
@@ -392,6 +393,43 @@ class Audio extends Object3D {
 		this.gain.gain.setTargetAtTime( value, this.context.currentTime, 0.01 );
 
 		return this;
+
+	}
+
+	copy( source, recursive ) {
+
+		super.copy( source, recursive );
+
+		if ( source.sourceType !== 'buffer' ) {
+
+			console.warn( 'THREE.Audio: Audio source type cannot be copied.' );
+
+			return this;
+
+		}
+
+		this.autoplay = source.autoplay;
+
+		this.buffer = source.buffer;
+		this.detune = source.detune;
+		this.loop = source.loop;
+		this.loopStart = source.loopStart;
+		this.loopEnd = source.loopEnd;
+		this.offset = source.offset;
+		this.duration = source.duration;
+		this.playbackRate = source.playbackRate;
+		this.hasPlaybackControl = source.hasPlaybackControl;
+		this.sourceType = source.sourceType;
+
+		this.filters = source.filters.slice();
+
+		return this;
+
+	}
+
+	clone( recursive ) {
+
+		return new this.constructor( this.listener ).copy( this, recursive );
 
 	}
 
