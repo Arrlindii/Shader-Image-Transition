@@ -7,6 +7,6 @@ void main(){
 
     gl_Position = clipPosition;
 
-    // varrying
+    // varying
     vUv = uv;
 }
