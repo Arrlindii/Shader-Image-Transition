@@ -59,9 +59,9 @@ const mesh4 = MeshItem(600, 600)
 
 const sectionMeshes = [mesh1, mesh2, mesh3, mesh4]
 
-for (let i = 0; i < sectionMeshes.length; i++) {
-    sectionMeshes[i].position.y = -objectsDistance * i
-}
+sectionMeshes.forEach((mesh, i) =>
+  mesh.position.y = -objectsDistance * i
+)
 
 scene.add(mesh1, mesh2, mesh3, mesh4)
 
@@ -69,9 +69,9 @@ const loader = new Loader()
 loader.loadTextures((textures) => {
     document.body.classList.remove("loading");
 
-    for (let i = 0; i < sectionMeshes.length; i++) {
-        sectionMeshes[i].material.uniforms.uTexture.value = textures[i]
-    }
+    sectionMeshes.forEach((mesh, i) =>
+      mesh.material.uniforms.uTexture.value = textures[i]
+    )
 
     observeScroll()
     const section = Math.round(scrollY / sizes.height)
