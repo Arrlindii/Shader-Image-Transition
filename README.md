@@ -6,7 +6,7 @@ Demo for the tutorial on creating dynamic image transitions with WebGL shaders, 
 
 [Article on Codrops](https://tympanus.net/codrops/?p=85782)
 
-[Demo](https://tympanus.net/Tutorials/ShaderImageTransition/)
+[Demo](https://tympanus.net/Tutorials/ShaderImageReveal/)
 
 ## Installation
 
